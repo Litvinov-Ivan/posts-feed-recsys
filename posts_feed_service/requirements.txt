@@ -1,0 +1,12 @@
+sqlalchemy
+pydantic
+typing
+fastapi
+datetime
+uvicorn
+psycopg2
+loguru
+pandas
+catboost
+sklearn
+requests
