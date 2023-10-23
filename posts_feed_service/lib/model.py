@@ -10,6 +10,7 @@ CONFIG_PATH = CONFIG_DIR / "config.yaml"
 with open(CONFIG_PATH, "r", encoding="utf-8") as config_file:
     CONFIG = yaml.load(config_file, Loader=yaml.FullLoader)
 
+
 class Model:
     def __init__(self):
         self.model = CatBoostClassifier()
