@@ -7,4 +7,7 @@
     <orderEntry type="jdk" jdkName="Python 3.10 (posts-feed-recsys)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="C:\Users\Иван\PycharmProjects\ML_KarpovCourses_Projects\posts-feed-recsys\posts_feed_service\requirements.txt" />
+  </component>
 </module>

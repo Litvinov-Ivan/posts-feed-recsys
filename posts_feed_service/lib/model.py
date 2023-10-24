@@ -12,7 +12,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from catboost import CatBoostClassifier
-from lib.datatypes import FeedRequest, FeedResponse, PostGet
+from lib.datatypes import FeedResponse, PostGet
 from lib.utils import request_transform
 
 
@@ -41,23 +41,29 @@ class Model:
             "posts_tfidf": pd.read_csv(CONFIG["tfidf_df"]),
         }
 
-    def get_feed(self, request: dict) -> FeedResponse:
+    async def get_feed(self, request: dict) -> FeedResponse:
         """
         Метод получения предсказания цены автомобиля.
 
         Производит обработку признаков запроса и
         получает рекомендованные новости.
         """
+        posts_limit = request["posts_limit"]
         request = request_transform(request, self.tables)
-        feed_prediction = self.model.predict_proba(request)[:, 1]
+        col_order = self.model.feature_names_
+        feed_prediction = self.model.predict_proba(request[col_order])[:, 1]
         indices = np.argpartition(
             feed_prediction,
-            -request["posts_limit"]
-        )[-request["posts_limit"]:]
+            -posts_limit
+        )[-posts_limit:]
         result_feed = self.tables["posts"].iloc[indices].reset_index()
-        feed = FeedResponse()
+        recs = FeedResponse()
         for i, post in result_feed.iterrows():
-            feed.append(PostGet(id=post["post_id"],
-                                text=post["text"],
-                                topic=post["topic"]))
-        return feed
+            recs.feed.append(
+                PostGet(
+                    post_id=post["post_id"],
+                    text=post["text"],
+                    topic=post["topic"]
+                )
+            )
+        return recs

@@ -16,12 +16,12 @@ app = FastAPI()
 
 
 @app.post("/feed")
-def feed(request: FeedRequest) -> FeedResponse:
+async def feed(request: FeedRequest) -> FeedResponse:
     """
     Ручка выдачи ленты новостей
 
     Ручке передаётся JSON с id пользователя и временем запроса,
     возвращается список рекоменндованных данному пользователю постов.
     """
-    recommendations = model.get_feed(request.dict())
-    return recommendations
+    recommendations = await model.get_feed(request.dict())
+    return recommendations.feed

@@ -8,7 +8,7 @@ import pandas as pd
 from typing import Dict
 
 
-def request_transform(request: dict, tables: Dict[pd.DataFrame]) -> pd.DataFrame:
+def request_transform(request: dict, tables: Dict[str, pd.DataFrame]) -> pd.DataFrame:
     """
     Функция преобразования признаков запроса.
     """
@@ -16,10 +16,10 @@ def request_transform(request: dict, tables: Dict[pd.DataFrame]) -> pd.DataFrame
     request_df = request_df.merge(
         tables["posts_tfidf"], on='post_id'
     ).drop(['text'], axis=1)
-    request_df['month'] = request["request_time"].month.astype(int)
-    request_df['hour'] = request["request_time"].hour.astype(int)
-    request_df['day'] = request["request_time"].day.astype(int)
-    request_df['weekday'] = request["request_time"].weekday().astype(int)
+    request_df['month'] = request["request_time"].month
+    request_df['hour'] = request["request_time"].hour
+    request_df['day'] = request["request_time"].day
+    request_df['weekday'] = request["request_time"].weekday()
     user_df = tables["users"][
         tables["users"]['user_id'] == request["user_id"]
     ]

@@ -32,4 +32,4 @@ class FeedResponse(BaseModel):
     Класс FeedResponse для валидации типов отклика при
     выдаче ленты постов
     """
-    recommendations: List[PostGet] = []
+    feed: List[PostGet] = []
