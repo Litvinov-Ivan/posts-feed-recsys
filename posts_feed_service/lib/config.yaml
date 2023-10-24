@@ -1,4 +1,4 @@
 classifier_model: "../data/catboost_model"
-tf_idf_df: "../data/tf_idf.csv"
+tfidf_df: "../data/tfidf_df.csv"
 posts_df: "../data/post_data.csv"
 user_df: "../data/user_data.csv"

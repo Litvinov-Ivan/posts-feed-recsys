@@ -1,12 +1,9 @@
-sqlalchemy
 pydantic
-typing
 fastapi
-datetime
 uvicorn
 psycopg2
 loguru
 pandas
+numpy
 catboost
-sklearn
-requests
+yaml
