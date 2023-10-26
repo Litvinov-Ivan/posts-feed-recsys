@@ -8,7 +8,10 @@ import pandas as pd
 from typing import Dict
 
 
-def request_transform(request: dict, tables: Dict[str, pd.DataFrame]) -> pd.DataFrame:
+def request_transform(
+        request: dict,
+        tables: Dict[str, pd.DataFrame]
+) -> pd.DataFrame:
     """
     Функция преобразования признаков запроса.
     """
