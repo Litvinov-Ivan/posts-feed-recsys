@@ -24,4 +24,4 @@ async def feed(request: FeedRequest) -> FeedResponse:
     возвращается список рекоменндованных данному пользователю постов.
     """
     recommendations = await model.get_feed(request.dict())
-    return recommendations.feed
+    return recommendations

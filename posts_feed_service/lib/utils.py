@@ -8,13 +8,24 @@ import pandas as pd
 from typing import Dict
 
 
+def get_group(user_id: int) -> int:
+    """
+    Функция получения группы пользователя для
+    проведения A\B теста
+    """
+    # найти хэш-функцию из ДЗ
+    return 1
+
+
 def request_transform(
         request: dict,
+        exp_group: int,
         tables: Dict[str, pd.DataFrame]
 ) -> pd.DataFrame:
     """
     Функция преобразования признаков запроса.
     """
+    # добавить загрузку эмбеддингов
     request_df = tables["posts"].copy()
     request_df = request_df.merge(
         tables["posts_tfidf"], on='post_id'

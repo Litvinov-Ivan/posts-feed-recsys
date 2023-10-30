@@ -32,4 +32,5 @@ class FeedResponse(BaseModel):
     Класс FeedResponse для валидации типов отклика при
     выдаче ленты постов
     """
+    exp_group: str
     feed: List[PostGet] = []

@@ -13,7 +13,7 @@ import numpy as np
 from pathlib import Path
 from catboost import CatBoostClassifier
 from lib.datatypes import FeedResponse, PostGet
-from lib.utils import request_transform
+from lib.utils import get_group, request_transform
 
 
 CONFIG_DIR = Path(__file__).parent
@@ -33,12 +33,23 @@ class Model:
         Загружает всё необходимое для обработки
         признаков и получения ленты.
         """
-        self.model = CatBoostClassifier()
-        self.model.load_model(CONFIG["classifier_model"])
+        self.ml_model = CatBoostClassifier()
+        self.dl_model = CatBoostClassifier()
+
+        self.ml_model.load_model(CONFIG["classic_ml_model"])
+        self.dl_model.load_model(CONFIG["text_emb_model"])
+
+        self.models_dict = {
+            0: self.ml_model,
+            1: self.dl_model
+        }
+
         self.tables = {
             "posts": pd.read_csv(CONFIG["post_df"]),
             "users": pd.read_csv(CONFIG["user_df"]),
             "posts_tfidf": pd.read_csv(CONFIG["tfidf_df"]),
+            "posts_lemmatized": pd.read_csv(CONFIG["lemmatized_post_df"]),
+            # Добавить загрузку w2v
         }
 
     async def get_feed(self, request: dict) -> FeedResponse:
@@ -48,16 +59,22 @@ class Model:
         Производит обработку признаков запроса и
         получает рекомендованные новости.
         """
+        exp_group = get_group(request["user_id"])
+        request = request_transform(request, exp_group, self.tables)
+
+        request_model = self.models_dict[exp_group]
+        col_order = request_model.feature_names_
+        feed_prediction = request_model.predict_proba(request[col_order])[:, 1]
+
         posts_limit = request["posts_limit"]
-        request = request_transform(request, self.tables)
-        col_order = self.model.feature_names_
-        feed_prediction = self.model.predict_proba(request[col_order])[:, 1]
         indices = np.argpartition(
             feed_prediction,
             -posts_limit
         )[-posts_limit:]
         result_feed = self.tables["posts"].iloc[indices].reset_index()
+
         recs = FeedResponse()
+        recs.exp_group = exp_group
         for i, post in result_feed.iterrows():
             recs.feed.append(
                 PostGet(

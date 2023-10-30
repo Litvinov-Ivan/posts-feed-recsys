@@ -1,4 +1,7 @@
-classifier_model: "./data/catboost_model"
+classic_ml_model: "./data/catboost_model"
+text_emb_model: "./data/catboost_model_with_text_embs"
 tfidf_df: "./data/tfidf_df.csv"
 post_df: "./data/post_data.csv"
 user_df: "./data/user_data.csv"
+lemmatized_post_df: "./data/post_data_lemmatized.csv"
+lemmatized_with_embs_post_df: "./post_data_lemmatized_and_embs.csv"
