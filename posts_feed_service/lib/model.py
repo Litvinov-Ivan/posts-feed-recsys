@@ -33,15 +33,15 @@ class Model:
         Загружает всё необходимое для обработки
         признаков и получения ленты.
         """
-        self.ml_model = CatBoostClassifier()
-        self.dl_model = CatBoostClassifier()
+        self.control_model = CatBoostClassifier()
+        self.test_model = CatBoostClassifier()
 
-        self.ml_model.load_model(CONFIG["classic_ml_model"])
-        self.dl_model.load_model(CONFIG["text_emb_model"])
+        self.control_model.load_model(CONFIG["classic_ml_model"])
+        self.test_model.load_model(CONFIG["text_emb_model"])
 
         self.models_dict = {
-            0: self.ml_model,
-            1: self.dl_model
+            "control": self.control_model,
+            "test": self.test_model
         }
 
         self.tables = {
@@ -49,7 +49,6 @@ class Model:
             "users": pd.read_csv(CONFIG["user_df"]),
             "posts_tfidf": pd.read_csv(CONFIG["tfidf_df"]),
             "posts_lemmatized": pd.read_csv(CONFIG["lemmatized_post_df"]),
-            # Добавить загрузку w2v
         }
 
     async def get_feed(self, request: dict) -> FeedResponse:
