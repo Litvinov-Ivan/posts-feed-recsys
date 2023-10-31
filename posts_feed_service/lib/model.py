@@ -49,6 +49,7 @@ class Model:
             "users": pd.read_csv(CONFIG["user_df"]),
             "posts_tfidf": pd.read_csv(CONFIG["tfidf_df"]),
             "posts_lemmatized": pd.read_csv(CONFIG["lemmatized_post_df"]),
+            "embs_post_df": pd.read_csv(CONFIG["embs_post_df"])
         }
 
     async def get_feed(self, request: dict) -> FeedResponse:
@@ -59,13 +60,13 @@ class Model:
         получает рекомендованные новости.
         """
         exp_group = get_group(request["user_id"])
+        posts_limit = request["posts_limit"]
         request = request_transform(request, exp_group, self.tables)
 
         request_model = self.models_dict[exp_group]
         col_order = request_model.feature_names_
         feed_prediction = request_model.predict_proba(request[col_order])[:, 1]
 
-        posts_limit = request["posts_limit"]
         indices = np.argpartition(
             feed_prediction,
             -posts_limit
