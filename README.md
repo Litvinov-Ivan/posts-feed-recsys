@@ -146,9 +146,14 @@ _Далее этот массив разбили на обучающую, вал
 | [-dl_model_training](notebooks/dl_model_training.pynb)|Ноутбук c получением эмбеддингов текстов и обучением с их помощью модели |
 
 ## Инструкция для запуска
-
+#### Способ 1
 `git clone https://github.com/Litvinov-Ivan/posts-feed-recsys.git` <br />
-`cd ./posts_feed_service` <br />
+`cd ./posts-feed-recsys` <br />
+`docker-compose up -d` <br />
+
+#### Способ 2
+`git clone https://github.com/Litvinov-Ivan/posts-feed-recsys.git` <br />
+`cd ./posts-feed-recsys/posts_feed_service` <br />
 `pip install --upgrade pip` <br />
 `pip install --no-cache-dir -r /requirements.txt` <br />
 `uvicorn app:app` <br />
