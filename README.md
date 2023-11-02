@@ -134,16 +134,16 @@ _Далее этот массив разбили на обучающую, вал
 
 ```
 
-| Название папки                                          | Описание                                            |
-|---------------------------------------------------------|-----------------------------------------------------|
-| [posts_feed_service](posts_feed_service/)               | Сервис                                              |
-| [-data](posts_feed_service/data)                        | Папка с предобученными моделями и вспомогательными датасетами|
-| [-lib](posts_feed_service/lib)                          | Папка со вспомогательными модулями                             |
-| [notebooks](notebooks/)                                 | Ноутбуки                                            |
-| [-data_downloading](notebooks/data_downloading.ipynb)   | Ноутбук со скачиванием данных |
-| [-data_processing](notebooks/data_processing.ipynb)     | Ноутбук с обработкой данных  |
-| [-model_training](notebooks/model_training.ipynb)       | Ноутбук с обучением модели классического ML |
-| [-dl_model_training](notebooks/dl_model_training.ipynb) |Ноутбук c получением эмбеддингов текстов и обучением с их помощью модели |
+| Название папки                            | Описание                                            |
+|-------------------------------------------|-----------------------------------------------------|
+| [posts_feed_service](posts_feed_service/) | Сервис                                              |
+| [-data](posts_feed_service/data) | Папка с предобученными моделями и вспомогательными датасетами|
+| [-lib](posts_feed_service/lib) | Папка со вспомогательными модулями                             |
+| [notebooks](notebooks/)                   | Ноутбуки                                            |
+| [-data_downloading](notebooks/data_downloading.pynb)            | Ноутбук со скачиванием данных |
+| [-data_processing](notebooks/data_processing.pynb)               | Ноутбук с обработкой данных  |
+| [-model_training](notebooks/model_training.pynb)  | Ноутбук с обучением модели классического ML |
+| [-dl_model_training](notebooks/dl_model_training.pynb)|Ноутбук c получением эмбеддингов текстов и обучением с их помощью модели |
 
 ## Инструкция для запуска
 

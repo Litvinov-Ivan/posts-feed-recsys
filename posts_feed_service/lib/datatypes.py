@@ -13,7 +13,7 @@ class FeedRequest(BaseModel):
     сервису входных признаков запроса ленты.
     """
     user_id: int = 200
-    request_time: datetime = datetime(2022, 1, 31)
+    request_time: datetime = datetime(2021, 10, 1)
     posts_limit: int = 5
 
 

@@ -5,13 +5,14 @@
 """
 
 import pandas as pd
+import numpy as np
 from typing import Dict
 from hashlib import md5
 
 
 def get_group(user_id: int, 
               groups_num: int = 2,
-              salt: str = "experiment_salt") -> str:
+              salt: str = "my_salt") -> str:
     """
     Функция получения группы пользователя для
     проведения A\B теста
@@ -49,9 +50,24 @@ def request_transform(
             tables["embs_post_df"][cols], on="post_id"
         )
 
-    user_df = tables["users"][
-        tables["users"]["user_id"] == request["user_id"]
-    ]
+    if request["user_id"] not in tables["users"]["user_id"].unique():
+        user_df = pd.DataFrame().from_dict(
+            {
+                "user_id": np.array(request["user_id"]),
+                "gender": tables["users"].gender.mode().values,
+                "age": tables["users"].age.mode().values,
+                "country": tables["users"].country.mode().values,
+                "city": tables["users"].city.mode().values,
+                "exp_group": tables["users"].exp_group.mode().values,
+                "os": tables["users"].os.mode().values,
+                "source": tables["users"].source.mode().values,
+            }
+        )
+    else:
+        user_df = tables["users"][
+            tables["users"]["user_id"] == request["user_id"]
+        ]
+
     request_df = request_df.merge(user_df, how="cross")
 
     return request_df.drop(["post_id", "user_id"], axis=1)
