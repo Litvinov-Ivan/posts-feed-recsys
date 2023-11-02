@@ -106,15 +106,22 @@ _Далее этот массив разбили на обучающую, вал
 ## Структура репозитория
 
 ```buildoutcfg
+|   README.md
+|   docker-compose.yaml
+|   request-examples.txt
+|
 ├───notebooks
 │       data_downloading.ipynb
 │       data_processing.ipynb
 │       model_training.ipynb
 │       dl_model_training.ipynb
+|       data_analyze.ipynb
+|       
 └───posts_feed_service
     │   __init__.py
     │   requirements.txt
     │   app.py
+    |   Dockerfile
     │
     ├───data
     │       catboost_model
@@ -131,7 +138,6 @@ _Далее этот массив разбили на обучающую, вал
             datatypes.py
             utils.py
             model.py
-
 ```
 
 | Название папки                            | Описание                                            |
