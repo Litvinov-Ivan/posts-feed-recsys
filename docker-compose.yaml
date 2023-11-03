@@ -3,8 +3,7 @@ version: "3"
 services:
 
   posts_feed_service:
-    build:
-      - ./posts_feed_service
+    build: ./posts_feed_service
     ports:
       - 8000:8000
     volumes:
