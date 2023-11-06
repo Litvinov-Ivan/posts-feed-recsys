@@ -44,7 +44,7 @@ def request_transform(
     request_df["weekday"] = request["request_time"].weekday()
 
     if exp_group == "test":
-        text_w2v_cols = [f"desc_w2v_{i}" for i in range(1, 11)]
+        text_w2v_cols = [f"text_w2v_{i}" for i in range(1, 11)]
         cols = ['post_id'] + text_w2v_cols
         request_df = request_df.merge(
             tables["embs_post_df"][cols], on="post_id"
