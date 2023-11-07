@@ -12,8 +12,8 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from catboost import CatBoostClassifier
-from lib.datatypes import FeedResponse, PostGet
-from lib.utils import get_group, request_transform
+from .datatypes import FeedResponse, PostGet
+from .utils import get_group, request_transform
 
 
 CONFIG_DIR = Path(__file__).parent
