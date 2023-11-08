@@ -6,7 +6,6 @@
 Цель - разработка сервиса рекомендательной системы постов в условной социальной сети.
 
 ### Исходные данные
-Имеются следующие данные:
 ##### Пользователи сервиса
 | Поле      | Описание                        |
 |-----------|---------------------------------|
@@ -184,9 +183,9 @@
 #### Способ 2
 `git clone https://github.com/Litvinov-Ivan/posts-feed-recsys.git` <br />
 `cd ./posts-feed-recsys/posts_feed_service` <br />
-`pip install --upgrade pip` <br />
-`pip install --no-cache-dir -r /requirements.txt` <br />
-`uvicorn app:app` <br />
+`python.exe -m pip install --upgrade pip` <br />
+`pip install -r requirements.txt` <br />
+`python.exe -m uvicorn app:app` <br />
 
 Сервис доступен по http://127.0.0.1:8000/docs, где во вкладке `/feed` можно протестировать запрос на выдачу ленты.
 Примеры запросов есть [здесь](request_examples.txt).
