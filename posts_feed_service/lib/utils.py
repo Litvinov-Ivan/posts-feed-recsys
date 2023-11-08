@@ -10,15 +10,15 @@ from typing import Dict
 from hashlib import md5
 
 
-def get_group(user_id: int, 
+def get_group(user_id: int,
               groups_num: int = 2,
               salt: str = "my_salt") -> str:
     """
     Функция получения группы пользователя для
-    проведения A\B теста
+    проведения AB теста
     """
     group = int(
-        md5((str(user_id) + salt).encode()).hexdigest(), 
+        md5((str(user_id) + salt).encode()).hexdigest(),
         16
     ) % groups_num
     if group:
