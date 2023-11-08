@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+
+  posts_feed_service:
+    build: ./posts_feed_service
+    ports:
+      - 8000:8000
+    volumes:
+      - ./posts_feed_service:/app
+    command: "app:app --host 0.0.0.0 --log-level error"
